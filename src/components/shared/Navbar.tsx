@@ -8,7 +8,7 @@ const Navbar = () => {
     const pathName = usePathname();
     return (
         <header className="sticky top-0 z-50 bg-black text-white py-4 px-4 md:px-12 border-b border-gray-800/60">
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="container mx-auto flex items-center justify-between">
                 
                 <Link
                     href="/"
