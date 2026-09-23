@@ -1,7 +1,8 @@
 import Workout from "@/components/homepage/Workout";
+import { WorkoutsType } from "@/types/WorkoutsType";
 
 const getWorkouts = async () => {
-    const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fitlog`);
     const data = await res.json();
     return data;
 };
@@ -22,7 +23,7 @@ const Workouts = async () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {workouts.map((workout) => (
+                    {workouts.map((workout: WorkoutsType) => (
                         <Workout key={workout.id} workout={workout}/>
                     ))}
                 </div>
