@@ -4,7 +4,7 @@ export default function Banner() {
     return (
         <section className="bg-black text-white py-6 px-4 md:px-12">
             <div className="container mx-auto bg-[#15171D] border border-[#222630] rounded-2xl p-8 sm:p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
-                <div className="w-full md:max-w-48 space-y-6">
+                <div className="w-full md:max-w-[550px] space-y-6">
                     <span className="text-[#C2F800] text-[11px] font-bold tracking-widest uppercase block">
                         WORKOUT LIBRARY
                     </span>
@@ -13,7 +13,7 @@ export default function Banner() {
                         TRAIN WITH INTENT. LOG EVERY SET.
                     </h1>
 
-                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-100">
+                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-[400px]">
                         FitLog is a dark, no-nonsense gym companion: pick a
                         lift, lock it into today's plan, and watch the week's
                         work add up.
@@ -30,7 +30,7 @@ export default function Banner() {
                 </div>
 
                 <div className="flex-1 flex justify-center md:justify-end w-full">
-                    <div className="relative w-full max-w-70 sm:max-w-[320px] md:max-w-48 h-65 sm:h-80 md:h-87.5">
+                    <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] h-[260px] sm:h-[320px] md:h-[350px]">
                         <Image
                             src="/assets/banner.png"
                             alt="FitLog Banner Gym Machine"
