@@ -1,3 +1,4 @@
+import TodaysPlanButton from "@/components/workoutdetails/todaysPlanButton";
 import { WorkoutsType } from "@/types/WorkoutsType";
 import Image from "next/image";
 import { FiCalendar, FiBookmark } from "react-icons/fi";
@@ -137,10 +138,7 @@ export default async function WorkoutDetailsPage({ params }: PageProps) {
                     </div>
 
                     <div className="flex items-center gap-3 pt-4">
-                        <button className="inline-flex items-center justify-center gap-2 bg-[#C2F800] text-black font-extrabold text-xs px-6 py-3 rounded-xl uppercase ">
-                            <FiCalendar className="w-4 h-4 stroke-[2.5]" />
-                            Add to today's plan
-                        </button>
+                        <TodaysPlanButton workout={workout} />
                         <button className="inline-flex items-center justify-center gap-2 bg-[#0F1115] border border-[#E5E7EB]-800 text-gray-300 font-bold text-xs px-5 py-3 rounded-xl uppercase ">
                             <FiBookmark className="w-4 h-4 stroke-[2.5]" />
                             Save for later

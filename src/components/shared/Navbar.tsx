@@ -1,11 +1,14 @@
 'use client';
+import { WorkoutContext } from "@/context/WorkoutContext";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContext } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 
 const Navbar = () => {
     const pathName = usePathname();
+    const {todaysPlan} = useContext(WorkoutContext);
     return (
         <header className="sticky top-0 z-50 bg-black text-white py-4 px-4 md:px-12 border-b border-gray-800/60">
             <div className="container mx-auto flex items-center justify-between">
@@ -46,7 +49,7 @@ const Navbar = () => {
                     >
                         <span className="text-gray-300">Plan</span>
                         <span className="bg-[#C2F800] text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center">
-                            0
+                            {todaysPlan.length}
                         </span>
                     </Link>
 
