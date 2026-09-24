@@ -8,7 +8,7 @@ import { CiMenuBurger } from "react-icons/ci";
 
 const Navbar = () => {
     const pathName = usePathname();
-    const {todaysPlan} = useContext(WorkoutContext);
+    const {todaysPlan,wishlistsPlan} = useContext(WorkoutContext);
     return (
         <header className="sticky top-0 z-50 bg-black text-white py-4 px-4 md:px-12 border-b border-gray-800/60">
             <div className="container mx-auto flex items-center justify-between">
@@ -59,7 +59,7 @@ const Navbar = () => {
                     >
                         <span className="text-gray-400">Saved</span>
                         <span className="border border-gray-600 text-gray-300 font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center">
-                            0
+                            {wishlistsPlan.length}
                         </span>
                     </Link>
 

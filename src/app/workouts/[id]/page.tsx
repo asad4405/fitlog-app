@@ -1,7 +1,7 @@
 import TodaysPlanButton from "@/components/workoutdetails/todaysPlanButton";
+import WishlistPlanButton from "@/components/workoutdetails/wishlistPlanButton";
 import { WorkoutsType } from "@/types/WorkoutsType";
 import Image from "next/image";
-import { FiCalendar, FiBookmark } from "react-icons/fi";
 
 interface PageProps {
     params: Promise<{
@@ -12,7 +12,7 @@ interface PageProps {
 export default async function WorkoutDetailsPage({ params }: PageProps) {
     const { id } = await params;
 
-    const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fitlog/${id}`, {
         cache: "no-store",
     });
 
@@ -31,8 +31,8 @@ export default async function WorkoutDetailsPage({ params }: PageProps) {
                         src={workout.image}
                         alt={workout.name}
                         fill
-                        priority
-                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
                     />
                 </div>
 
@@ -139,10 +139,7 @@ export default async function WorkoutDetailsPage({ params }: PageProps) {
 
                     <div className="flex items-center gap-3 pt-4">
                         <TodaysPlanButton workout={workout} />
-                        <button className="inline-flex items-center justify-center gap-2 bg-[#0F1115] border border-[#E5E7EB]-800 text-gray-300 font-bold text-xs px-5 py-3 rounded-xl uppercase ">
-                            <FiBookmark className="w-4 h-4 stroke-[2.5]" />
-                            Save for later
-                        </button>
+                        <WishlistPlanButton workout={workout} />
                     </div>
                 </div>
             </div>
