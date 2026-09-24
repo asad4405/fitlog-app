@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const WorkoutsLoading = () => {
+const Loading = () => {
     return (
         <div className="min-h-[60vh] w-full flex items-center justify-center">
             <span className="loading loading-spinner text-neutral loading-lg"></span>
@@ -8,4 +8,4 @@ const WorkoutsLoading = () => {
     );
 };
 
-export default WorkoutsLoading;
+export default Loading;

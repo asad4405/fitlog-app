@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Banner() {
     return (
@@ -20,12 +21,12 @@ export default function Banner() {
                     </p>
 
                     <div className="pt-2">
-                        <a
-                            href=""
+                        <Link
+                            href="/"
                             className="inline-flex items-center justify-center bg-[#C2F800] text-black font-extrabold text-xs px-5 py-3 rounded-lg hover:opacity-90 transition-opacity uppercase tracking-wider"
                         >
                             BROWSE WORKOUTS
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
