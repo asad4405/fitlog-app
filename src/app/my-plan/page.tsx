@@ -5,6 +5,8 @@ import { useContext, useState } from "react";
 import { FiCheck, FiClock, FiX } from "react-icons/fi";
 import { IoFlameOutline, IoStarOutline } from "react-icons/io5";
 import { WorkoutContext } from "@/context/WorkoutContext";
+import { WorkoutsType } from "@/types/WorkoutsType";
+import { toast } from "react-toastify";
 
 const MyPlan = () => {
     const [activeTab, setActiveTab] = useState<"today" | "saved">("today");
@@ -16,12 +18,38 @@ const MyPlan = () => {
 
     const handleRemoveFromToday = (id: number) => {
         setTodaysPlan((workout) => workout.filter((item) => item.id !== id));
+        toast.error("Removed from Today's Plan");
     };
 
     const handleRemoveFromSaved = (id: number) => {
         setWishlistsPlan((workout) => workout.filter((item) => item.id !== id));
+        toast.error("Removed from Saved Workouts");
     };
 
+    const handleWorkoutDone = (id: number) => {
+        setTodaysPlan((workout) => workout.filter((item) => item.id !== id));
+        toast.success("Workout completed successfully!");
+    };
+
+
+    const [sortBy,setSortBy] = useState<"duration" | "calories" | "rating">("duration");
+
+    const sortWorkouts = (workouts: WorkoutsType[]) => {
+        const sortedWorkouts = [...workouts];
+
+        if(sortBy === "duration"){
+            sortedWorkouts.sort((a,b) => b.duration - a.duration);
+        }else if(sortBy === "calories"){
+            sortedWorkouts.sort((a,b) => b.caloriesBurned - a.caloriesBurned);
+        }else if(sortBy === "rating"){
+            sortedWorkouts.sort((a,b) => b.rating - a.rating);
+        }
+
+        return sortedWorkouts;
+    }
+
+    const sortedTodaysPlans = sortWorkouts(todaysPlan);
+    const sortedwishlistsPlans = sortWorkouts(wishlistsPlan);
     return (
         <section className="bg-black text-white py-8 w-full">
             <div className="container mx-auto px-4 w-full space-y-6">
@@ -93,17 +121,17 @@ const MyPlan = () => {
                         <span className="text-gray-400 font-medium">
                             Sort By
                         </span>
-                        <select className="select select-bordered select-xs sm:select-sm bg-[#181a20] border-gray-800/80 text-white font-semibold rounded-xl focus:outline-none min-h-0 h-9">
-                            <option>Duration</option>
-                            <option>Calories</option>
-                            <option>Rating</option>
+                        <select onChange={(e) => setSortBy(e.target.value as "duration" | "calories" | "rating") } value={sortBy} className="select select-bordered select-xs sm:select-sm bg-[#181a20] border-gray-800/80 text-white font-semibold rounded-xl focus:outline-none min-h-0 h-9">
+                            <option value={'duration'}>Duration</option>
+                            <option value={'calories'}>Calories</option>
+                            <option value={'rating'}>Rating</option>
                         </select>
                     </div>
                 </div>
 
                 {activeTab === "today" && (
                     <div className="w-full">
-                        {!todaysPlan || todaysPlan.length === 0 ? (
+                        {!sortedTodaysPlans || sortedTodaysPlans.length === 0 ? (
                             <div className="border border-dashed border-gray-800 rounded-3xl bg-[#121418] py-16 px-4 flex flex-col items-center justify-center text-center space-y-3 my-4">
                                 <h3 className="text-xl sm:text-2xl font-black tracking-wide text-white uppercase font-sans">
                                     NOTHING HERE YET
@@ -120,7 +148,7 @@ const MyPlan = () => {
                             </div>
                         ) : (
                             <div className="space-y-4 w-full">
-                                {todaysPlan.map((workout) => (
+                                {sortedTodaysPlans.map((workout) => (
                                     <div
                                         key={workout.id}
                                         className="bg-[#181a20] border border-gray-800/80 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full"
@@ -165,13 +193,13 @@ const MyPlan = () => {
                                             >
                                                 View Details
                                             </Link>
-                                            <button className="btn btn-xs sm:btn-sm bg-[#ccff00] hover:bg-[#b8e600] text-black font-extrabold border-none rounded-xl px-4 normal-case">
+                                            <button onClick={() => handleWorkoutDone(workout.id)} className="btn btn-xs sm:btn-sm bg-[#ccff00] hover:bg-[#b8e600] text-black font-extrabold border-none rounded-xl px-4 normal-case">
                                                 <FiCheck className="w-4 h-4 stroke-[3]" />
                                                 Mark as Done
                                             </button>
                                             <button
                                                 onClick={() => handleRemoveFromToday(workout.id)}
-                                                className="btn btn-ghost btn-xs sm:btn-sm btn-circle text-gray-500 hover:text-gray-300"
+                                                className="btn btn-ghost btn-xs sm:btn-sm btn-circle text-gray-500 hover:bg-black hover:text-white"
                                             >
                                                 <FiX className="w-4 h-4" />
                                             </button>
@@ -185,7 +213,7 @@ const MyPlan = () => {
 
                 {activeTab === "saved" && (
                     <div className="w-full">
-                        {!wishlistsPlan || wishlistsPlan.length === 0 ? (
+                        {!sortedwishlistsPlans || sortedwishlistsPlans.length === 0 ? (
                             <div className="border border-dashed border-gray-800 rounded-3xl bg-[#121418] py-16 px-4 flex flex-col items-center justify-center text-center space-y-3 my-4">
                                 <h3 className="text-xl sm:text-2xl font-black tracking-wide text-white uppercase font-sans">
                                     NOTHING HERE YET
@@ -202,7 +230,7 @@ const MyPlan = () => {
                             </div>
                         ) : (
                             <div className="space-y-4 w-full">
-                                {wishlistsPlan.map((workout) => (
+                                {sortedwishlistsPlans.map((workout) => (
                                     <div
                                         key={workout.id}
                                         className="bg-[#181a20] border border-gray-800/80 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full"
@@ -249,7 +277,7 @@ const MyPlan = () => {
                                             </Link>
                                             <button
                                                 onClick={() => handleRemoveFromSaved(workout.id)}
-                                                className="btn btn-ghost btn-xs sm:btn-sm btn-circle text-gray-500 hover:text-gray-300"
+                                                className="btn btn-ghost btn-xs sm:btn-sm btn-circle text-gray-500 hover:bg-black hover:text-white"
                                             >
                                                 <FiX className="w-4 h-4" />
                                             </button>

@@ -24,7 +24,7 @@ export default async function WorkoutDetailsPage({ params }: PageProps) {
 
     return (
         <main className="min-h-screen bg-black text-white py-10">
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
+            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
                 
                 <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden bg-[#16181e] shadow-2xl">
                     <Image
