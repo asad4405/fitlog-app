@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { WorkoutContext } from "@/context/WorkoutContext";
 import { WorkoutsType } from "@/types/WorkoutsType";
 import { useContext } from "react";
@@ -8,15 +8,14 @@ import { toast } from "react-toastify";
 const TodaysPlanButton = ({ workout }: { workout: WorkoutsType }) => {
     const { todaysPlan, setTodaysPlan } = useContext(WorkoutContext);
 
-    const isTodaysPlan = todaysPlan.some(
-        plan => plan.id === workout.id
-    );
+    const isTodaysPlan = todaysPlan.some((plan) => plan.id === workout.id);
 
     const handleTodaysPlan = () => {
         if (isTodaysPlan) {
             toast.error("Already added to today's plan");
-        }else{
-            
+        } else if (todaysPlan.length >= 5) {
+            toast.error("Today's plan can contain maximum 5 workouts");
+        } else {
             setTodaysPlan([...todaysPlan, workout]);
             toast.success("Added to today's plan");
         }

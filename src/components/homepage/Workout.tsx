@@ -44,7 +44,7 @@ const Workout = ({ workout }: WorkoutsTypeProps) => {
                         </div>
                     </div>
 
-                    <div className="pt-3 border-t border-gray-800/60 flex items-center justify-between text-gray-400 text-xs">
+                    <div className="pt-3 border-t border-gray-800/60 flex items-center gap-6 text-gray-400 text-xs">
                         <div className="flex items-center gap-1.5">
                             <FiClock />
                             <span>{workout.duration} min</span>

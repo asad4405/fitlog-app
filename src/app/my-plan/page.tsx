@@ -171,7 +171,7 @@ const MyPlan = () => {
                                                 </p>
                                                 <div className="flex items-center gap-3 pt-1 text-gray-400 text-xs font-medium">
                                                     <div className="flex items-center gap-1">
-                                                        <FiClock className="w-3.5 h-3.5" />
+                                                        <FiClock className="w-3.5 h-3.5 text-[#ccff00]" />
                                                         <span>{workout.duration} min</span>
                                                     </div>
                                                     <div className="flex items-center gap-1">
@@ -179,7 +179,7 @@ const MyPlan = () => {
                                                         <span>{workout.caloriesBurned} kcal</span>
                                                     </div>
                                                     <div className="flex items-center gap-1">
-                                                        <IoStarOutline className="w-3.5 h-3.5" />
+                                                        <IoStarOutline className="w-3.5 h-3.5 text-[#ccff00]" />
                                                         <span>{workout.rating}</span>
                                                     </div>
                                                 </div>
